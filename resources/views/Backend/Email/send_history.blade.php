@@ -1,6 +1,11 @@
 @extends('Backend.admin_layout')
 @section('content')
 
+<style>
+    .w-5{
+        width: 10px !important;
+    }
+</style>
 
 <div class="row mt-5">
     <div class="col-12">
@@ -22,15 +27,20 @@
                         <tr>
                             <th scope="row">{{ $emailKey+1 }}</th>
                             <td>{{ $sendEmail->email }}</td>
-                            <td>{{ $sendEmail->subject }}</td>
-                            <td>{{ $sendEmail->create_at->diffForHumans() }}</td>
-                            <td><span class="text-uppercase">{{ $email->status }}</span></td>
+                            <td><a href="{{ url('sent-email-detail',$sendEmail->id) }}" title="Click To Preview">{!! wordwrap($sendEmail->subject, 50, "<br>", false) !!}</a></td>
+                            <td>{{ $sendEmail->created_at->diffForHumans() }}</td>
                         </tr>
-                    @endforeach     
+                    @endforeach
                 @endif
             
             </tbody>
           </table>
+
+          @if(!empty($allSendEmails))
+                    <div class="mt-5 mb-5 paginationMain">
+                        {{ $allSendEmails->links() }}  
+                        </div>   
+                @endif
     </div>
 </div>
 

@@ -18,9 +18,13 @@ class MessageMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData)
+    public function __construct($email, $subject, $message)
     {
-        $this->mailData = $mailData;
+        $this->mailData = [
+            'email' => $email,
+            'subject' => $subject,
+            'message' => $message,
+        ];
     }
 
     /**
@@ -29,7 +33,7 @@ class MessageMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Message Mail',
+            subject: $this->mailData['subject'] ?? 'Test Mail',
         );
     }
 
@@ -38,9 +42,9 @@ class MessageMail extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'Backend.Email.email_template',
-        );
+    return new Content(
+        view: 'Backend.Email.email_template',
+    );
     }
 
     /**

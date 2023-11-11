@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="col-12 mt-3">
-        <form action="{{ URL::to('') }}" method="post">
+        <form action="{{ URL::to('send-email') }}" method="post">
             @csrf
             <div class="row">
                 <div class="col">
@@ -36,7 +36,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Message</label>
-                        <textarea name="" placeholder="Enter Your Message" class="form-control"></textarea>
+                        <textarea name="message" placeholder="Enter Your Message" class="form-control"></textarea>
                     </div>
                 </div>
               </div>

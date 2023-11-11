@@ -15,16 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
-
-// Route::get('home', function () {
-//     return view('Backend.Dashboard.dashboard');
-// })->name('home');
-
-// Route::get('emails', function () {
-//     return view('Backend.Email.index');
-// });
 
 Route::get('/home', [App\Http\Controllers\Backend\DashboardController::class, "index"])->name('home');
 
@@ -36,7 +28,9 @@ Route::get('/delete-user/{id}', [App\Http\Controllers\Backend\UserController::cl
 Route::get('/emails', [App\Http\Controllers\Backend\EmailController::class, "index"]);
 Route::get('/delete-email/{id}', [App\Http\Controllers\Backend\EmailController::class, "destroy"]);
 Route::get('/compose', [App\Http\Controllers\Backend\EmailController::class, "create"]);
+Route::post('/send-email', [App\Http\Controllers\Backend\EmailController::class, "sendEmail"]);
 Route::get('/sent-history', [App\Http\Controllers\Backend\EmailController::class, "sendHistory"]);
+Route::get('/update-email-status/{id}/{status}', [App\Http\Controllers\Backend\EmailController::class, "updateEmailStatus"]);
 Route::post('/process-email-csv', [App\Http\Controllers\Backend\EmailController::class, "processEmailCSV"]);
 
 Auth::routes();
